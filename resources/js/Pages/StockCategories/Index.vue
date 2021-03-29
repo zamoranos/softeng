@@ -19,13 +19,15 @@
                 <th class="px-4 py-3">Date Created</th>
               </tr>
               
-              <tr class="bg-gray-100 border-b border-gray-200">
-                <td class="px-4 py-3"></td>
-                <td class="px-4 py-3"></td>
-                <td class="px-4 py-3"></td>
-                <td class="px-4 py-3"></td>
-                <td class="px-4 py-3"></td>
+              <tr v-for="item in stock_categories" class="bg-gray-100 border-b border-gray-200">
+                <td class="px-4 py-3">{{item.id}}</td>
+                <td class="px-4 py-3">{{item.description}}</td>
+                <td class="px-4 py-3">{{item.type}}</td>
+                <td class="px-4 py-3">{{item.stock_account}}</td>
+                <td class="px-4 py-3">{{item.created_at}}</td>
               </tr> 
+              <!-- each row -->
+
             </table>
           </div>
         </div>
@@ -38,6 +40,9 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 
 export default {
+    props: {
+        stock_categories: Array, 
+    }, 
   components: {
     BreezeAuthenticatedLayout,
   },
