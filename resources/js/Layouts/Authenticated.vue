@@ -19,7 +19,27 @@
                                     Dashboard
                                 </breeze-nav-link>
                             </div>
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:m1-10 sm:flex"
+                            >
+                                <breeze-nav-link
+                                    :href="route('sc.index')"
+                                    :active="route().current('dashboard')"
+                                >
+                                    Stock Categories
+                                </breeze-nav-link>
+                            </div>
+                        <div
+                            class="hidden space-x-8 sm:-my-px sm:m1-10 sm:flex"
+                        >
+                            <breeze-nav-link
+                                :href="route('dashboard')"
+                                :active="route().current('dashboard')"
+                            >
+                                Stocks
+                            </breeze-nav-link>
                         </div>
+                    </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
@@ -91,6 +111,7 @@
 
             <!-- Page Content -->
             <main>
+                <flash-messages />
                 <slot />
             </main>
         </div>
@@ -103,6 +124,7 @@
     import BreezeDropdownLink from '@/Components/DropdownLink'
     import BreezeNavLink from '@/Components/NavLink'
     import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink'
+    import FlashMessages from '@/Components/FlashMessages.vue'
 
     export default {
         components: {
@@ -111,12 +133,14 @@
             BreezeDropdownLink,
             BreezeNavLink,
             BreezeResponsiveNavLink,
+            FlashMessages,
         },
 
-        data() {
+        
+                FlashMessagesdata() {
             return {
                 showingNavigationDropdown: false,
-            }
+            };
         },
-    }
+    };
 </script>
