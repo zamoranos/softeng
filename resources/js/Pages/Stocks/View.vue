@@ -3,7 +3,15 @@
         <Layout>
             <div class="flex justify-center w-full">
                 <div class="bg-white flex flex-col w-1/3 my-20 p-6">
+                  <div class="flex flex-row justify-between">
                     <h2 class="text-lg">Stock Form</h2>
+                    <inertia-link :href="route('stock.destroy', form.id)" method="delete">
+                      <button class="bg-red-700 w-20 transition duration-150 ease-in-out hover:bg-red-600 rounded text-white px-5 py-2 text-xs">
+                          Delete
+                      </button>
+                    </inertia-link>
+                  </div>
+
                     <form 
                         id="stock-form"
                         name="stock-form"
@@ -17,6 +25,7 @@
                                 name="id"
                                 v-model="form.id"
                                 autocomplete="off"
+                                readonly
                             />
                             <div class="text-red-700 text-sm">
                                 {{ errors.id }}
@@ -85,7 +94,7 @@
                                 type="submit"
                                 class="bg-indigo-800 text-white p-2" 
                             >
-                                Save
+                                Update
                             </button>
                         </div>
                     </form>
@@ -104,20 +113,21 @@ export default {
         Layout,
     },
     props: {
+        model: Object,
         stock_categories: Array,
         errors: Object,
     },
     setup(props, context) {
         const form = reactive({
-            id: null,
-            description: null,
-            stock_category_id: null,
-            uom: null,
-            barcode: null,
-            //discontinued: "N",
+            id: props.model.id,
+            description: props.model.description,
+            stock_category_id: props.model.stock_category_id,
+            uom: props.model.uom,
+            barcode: props.model.barcode,
+            discontinued: props.model.discontinued,
         });
         const submit = () => {
-            Inertia.post(route("stock.store"), form, {
+            Inertia.put(route("stock.update", form), form, {
                 onSuccess: () => {
                 form.id = null;
                 form.description = null;
@@ -125,11 +135,13 @@ export default {
                 form.uom = null;
                 form.barcode = null;
                 form.discontinued = "N";
-                    // this.reset();
+                    /*
+                     this.reset();
+                    route("stock.index")
+                    */
                 },
             });
         };
-        
         return {
             form,
             submit,

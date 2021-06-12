@@ -48,7 +48,7 @@ class StockCategoryController extends Controller
                 'id' => 'required|numeric|unique:stock_categories',
                 'description' => 'required',
                 'type' => 'required',
-                'stock_account' => 'nullable',
+                'stock_account' => 'required',
             ]
         );
 
@@ -103,7 +103,7 @@ class StockCategoryController extends Controller
             [
                 'description' => 'required',
                 'type' => 'required',
-                'stock_account' => 'nullable',
+                'stock_account' => 'required',
             ]
         );
 
@@ -111,7 +111,7 @@ class StockCategoryController extends Controller
 
         $model->update($validate);
 
-        return Redirect::route('sc.index')->with("Success", "Stock Categorty Updated");
+        return Redirect::route('sc.index')->with('success', 'Stock Category Updated');
     }
 
     /**
